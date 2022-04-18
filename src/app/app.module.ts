@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {HttpModule} from '@angular/http';
-import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 
@@ -12,12 +10,18 @@ import { GithubService } from './service/github.service';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ProfileComponent
+    AppComponent, 
+    ProfileComponent,
+
+  
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    
+
+
 
   ],
   providers: [],
