@@ -1,26 +1,59 @@
+
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { HttpClient} from '@angular/common/http';
-//import 'rxjs/add/operator/map';
-//import 'rxjs/add/operator/debounceTime';
-//import 'rxjs/add/operator/distinctUntilChanged';
+import { Observable, of } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
+import { RepoArray } from '../user.ts/user';
 
-@Injectable()
-export class GithubService {
-  // private username: string;
-  constructor(private _http: HttpClient) {
-    // this.username = 'ErikBjare';
+
+
+
+const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
+
+@Injectable({
+  providedIn: 'root'
+})
+export class GithubServiceService {
+
+  constructor(private http: HttpClient) { }
+
+  configUrl = 'https://api.github.com';
+
+
+  getRepos(userName: string): Observable<RepoArray[]> {
+    const url = `${this.configUrl}/users/${userName}/repos`
+    return this.http.get<RepoArray[]>(url)
+    .pipe(
+        catchError(this.handleError('fetch users', []))
+      );
   }
-  // Get Username info
-  getUser = (username: string) => {
-    return this._http.get('http://api.github.com/users/' + username)
-     // .map((res: { json: () => any; }) => res.json())
+
+  getOrgaRepos(userName: string): Observable<RepoArray[]> {
+    const url = `${this.configUrl}/orgs/${userName}/repos`;
+    return this.http.get<RepoArray[]>(url)
+    .pipe(
+      catchError(this.handleError('fetch orgs', []))
+    );
   }
-  //  Get Users Respositories
-  getRepos = (username: string) => {
-    return this._http.get('http://api.github.com/users/' + username + '/repos?page=1&per_page=10&sort=updated')
-      //.map((res: { json: () => any; }) => res.json())
-  }
+
+  private handleError<T> (operation = 'operation', result?: T) {
+  return (error: any): Observable<T> => {
+ 
+    // TODO: send the error to remote logging infrastructure
+    console.error(error); // log to console instead
+ 
+    // TODO: better job of transforming error for user consumption
+    console.log(`${operation}. Reason: ${error.message}`);
+ 
+    // Let the app keep running by returning an empty result.
+    return of(result as T);
+  };
 }
+ 
+}
+
 
 

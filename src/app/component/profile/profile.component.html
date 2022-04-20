@@ -1,78 +1,42 @@
-<h3 class="ui inverted centered block header">Need to find someone on Github?</h3>
-  <div class="ui icon fluid input">
-    <input class="prompt" type="text" placeholder="Enter a Github Username...">
-    <i class="search icon"></i>
-  </div>
-  <div class="ui divider"></div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" routerLink="/">
+    <img src="https://www.teenvio.com/es/wp-content/plugins/g1-social-icons/images/github/github-256.png" width="50" height="50" alt="logo">
+    {{ title }}
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-<div *ngIf="user">
-  <div class="ui raised segment">
-    <h3 class="ui inverted centered block header">{{user.name}}</h3>
-    <div class="ui items">
-      <div class="item">
-        <div class="thumbnail image">
-          <img src="{{user.avatar_url}}">
-        </div>
-        <div class="content">
-          <a href="{{user.html_url}}">{{user.login}}</a>
-          <div class="ui divider"></div>
-          <div class="ui list">
-            <div class="item">
-              <p><i class="marker icon"></i> {{user.location}}</p>
-            </div>
-            <div *ngIf="user.blog">
-              <div class="item">
-                <p><i class="external icon"></i> <a href="{{user.blog}}">{{user.blog}}</a></p>
-              </div>
-            </div>
-            <div *ngIf="user.company">
-              <div class="item">
-                <p><i class="users icon"></i> {{user.company}}</p>
-              </div>
-            </div>
-          </div>
-          <div class="ui horizontal list">
-            <div class="item">
-              <p>{{user.followers }} Followers</p>
-            </div>
-            <div class="item">
-              <p>{{user.following }} Following</p>
-            </div>
-          </div>
-          <div class="meta" *ngIf="user.bio">
-            <span>Bio</span>
-            <p>{{user.bio}}</p>
-          </div>
-          <div class="description">
-            <p></p>
-          </div>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto nav">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/user">Search User</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/organization">Search Organization</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-md-6">
+      <div class="card text-center" style="margin-top: 20px">
+        <div class="card-body">
+          <a routerLink="user" class="btn btn-primary">Search User</a>
         </div>
       </div>
     </div>
-  </div>
-
-
-  <div class="ui raised segment">
-    <h3 class="ui inverted centered block header">Repositories</h3>
-    <div class="ui relaxed divided list" *ngFor="let repo of repos">
-      <div class="item">
-        <div class="right floated content">
-          <div>
-            <span class="ui label"><i class="find icon"></i>{{repo.watchers_count}}</span>
-            <span class="ui label"><i class="star icon"></i>{{repo.stargazers_count}}</span>
-          </div>
-        </div>
-        <div class="content">
-          <a href="{{repo.html_url}}" target="_blank" class="header">{{repo.name}}</a>
-          <p>{{repo.description}}</p>
+    <div class="col-xs-12 col-md-6">
+      <div class="card text-center" style="margin-top: 20px">
+        <div class="card-body">
+          <a routerLink="organization" class="btn btn-primary">Search Organisation</a>
         </div>
       </div>
-      <hr>
     </div>
-    <h3 class="ui inverted centered block header">
-      <a href="https://github.com/{{user.login}}?tab=repositories" >View More Repositories</a>
-    </h3>
   </div>
 </div>
+
 
 
